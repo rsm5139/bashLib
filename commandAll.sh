@@ -28,7 +28,7 @@
 ##################################################################
 function usage()
 {
-  echo "Usage: commandAll [-r -d --prefix \"<path/to/directory>\" --options \"<options/flags>\" --ext \"<extensions to include>\"] command"
+  echo "Usage: $0 [-r -d --prefix \"<path/to/directory>\" --options \"<options/flags>\" --ext \"<extensions to include>\"] command"
   echo ""
   echo "  command: command to execute"
   echo "        EXP: \"echo\""
@@ -99,11 +99,11 @@ for name in $prefix/*; do
       # Is -d set?
       if [ "$d" == "0" ]; then
         # yes -> Call commandAll with -d option set
-        cmd_str="commandAll -d -r --options \"${options}\" --ext \"${ext}\" --prefix \"$name\" \"${command_str}\""
+        cmd_str="$0 -d -r --options \"${options}\" --ext \"${ext}\" --prefix \"$name\" \"${command_str}\""
         eval "$cmd_str"
       else
         # no -> Call commandAll without -d flag
-        cmd_str="commandAll -r --options \"${options}\" --ext \"${ext}\" --prefix \"$name\" \"${command_str}\""
+        cmd_str="$0 -r --options \"${options}\" --ext \"${ext}\" --prefix \"$name\" \"${command_str}\""
         eval "$cmd_str"
       fi
     fi
