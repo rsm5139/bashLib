@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+###
+# uniqList [-f] <delimited string> [delimiter]
+#
+# Takes a delimited string and returns a delimited with only the unique elements
+# from the origingal string.
+#
+# Flags:
+# -f  case insensitive
+# Positional Arguments:
+# $1  delimited string
+# $2  delimiter (default: ',')
+# 
+# Example:
+# uniqList -f "World hello world" " "
+# ->  hello world
+#
+# uniqList "cats,dogs,birds,cats"
+# ->  birds,cats,dogs
+###
+
+# Initialize variables
+delim=','
+str=''
+sort_options='-u'
+
+[ "$#" -lt 1 ] && exit 1
+
+[ "$1" == "-f" ] && { sort_options="-u -f"; shift; }
+
+[ -z "$1" ] && exit 1
+
+str="$1"
+[ -z "$2" ] || delim="$2"
+
+str=$(echo "$str" | tr "$delim" '\n' | sort $sort_options | tr '\n' "$delim" | sed -e "s/$delim$//" -e "s/^$delim//")
+
+echo "$str"
+
+exit 0
