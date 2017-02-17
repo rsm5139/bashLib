@@ -45,7 +45,7 @@ EOF
     return 127
   }
   
-  ts=$(cdo showtimestamp "$1") 2>/dev/null || {
+  ts=$(cdo showtimestamp "$1" 2>/dev/null) || {
     echo "Problem using 'cdo timestamp' on $1. Check that file exists and is a NetCDF file." >&2
     return 3
   }
